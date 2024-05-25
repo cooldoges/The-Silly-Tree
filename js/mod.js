@@ -40,10 +40,13 @@ function canGenPoints(){
 // Calculate points/sec!
 function getPointGen() {
 	if(!canGenPoints())
+
 		return new Decimal(0)
 
-	let gain = new Decimal(1)
-	return gain
+		let gain = new Decimal(1)
+		if (hasUpgrade('e', 11)) gain = gain.times(2)
+		if (hasUpgrade('e', 12)) gain = gain.times(upgradeEffect('e', 12))		
+		return gain
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
