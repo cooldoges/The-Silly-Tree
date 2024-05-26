@@ -85,18 +85,19 @@ addLayer("p", {
             title: "New generator Coat",
             description: "Double your Golden Coin gain again.",
             cost: new Decimal(1),
-         12: {
-            title: "More Store Trips",
-            description: "Double your Egg gain.",
+         },
+            12: {
+            title: "fueled fuel",
+            description: "TRIPLE your Golden Coin gain, and yes, the fuel has paint in it now.",
             cost: new Decimal(5),
          },
             
-        },
+    },
         hotkeys: [
             {key: "p", description: "P: Reset for Paint Buckets", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
+    },
 
-}},
 addLayer("w", {
     startData() { return {                  // startData is a function that returns default data for a layer. 
         unlocked: false,      // You can add more variables here to add them to your layer.
@@ -126,13 +127,58 @@ addLayer("w", {
     layerShown() { return true },          // Returns a bool for if this layer's node should be visible in the tree.
 
     upgrades: {
-        // Look in the upgrades docs to see what goes here!
+        11: {
+            title: "Fresh new clothes",
+            description: "Double your Golden Coin gain again again.",
+            cost: new Decimal(1),
     },
-    hotkeys: [
+    12: {
+        title: "The power in numbers",
+        description: "TRIPLE your Golden Coin gain AGAIN.",
+        cost: new Decimal(5),
+     },
+},
+hotkeys: [
         {
-            key: "p", // What the hotkey button is. Use uppercase if it's combined with shift, or "ctrl+x" for holding down ctrl.
-            description: "P: reset Eggs and Golden Coins for Paint Buckets", // The description of the hotkey that is displayed in the game's How To Play tab
-            onPress() { if (player.p.unlocked) doReset("p") },
+            key: "w", // What the hotkey button is. Use uppercase if it's combined with shift, or "ctrl+x" for holding down ctrl.
+            description: "W: reset Eggs and Golden Coins for Washing machines", // The description of the hotkey that is displayed in the game's How To Play tab
+            onPress() { if (player.p.unlocked) doReset("w") },
         }
-    ]
-}))
+    ]}))
+    addLayer("i", {
+        startData() { return {                  // startData is a function that returns default data for a layer. 
+            unlocked: false,                     // You can add more variables here to add them to your layer.
+            points: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
+        }},
+    
+        color: "#4BDC13",                       // The color for this layer, which affects many elements.
+        resource: "Insanities",            // The name of this layer's main prestige resource.
+        row: 2,                                 // The row this layer is on (0 is the first row).
+    
+        baseResource: "points",                 // The name of the resource your prestige gain is based on.
+        baseAmount() { return player.points },  // A function to return the current amount of baseResource.
+    
+        requires: new Decimal(1000000),              // The amount of the base needed to  gain 1 of the prestige currency.
+                                                // Also the amount required to unlock the layer.
+    
+        type: "normal",                         // Determines the formula used for calculating prestige currency.
+        exponent: 0.5,                          // "normal" prestige gain is (currency^exponent).
+    
+        gainMult() {                            // Returns your multiplier to your gain of the prestige resource.
+            return new Decimal(1)               // Factor in any bonuses multiplying gain here.
+        },
+        gainExp() {                             // Returns the exponent to your gain of the prestige resource.
+            return new Decimal(1)
+        },
+    
+        layerShown() { return true },          // Returns a bool for if this layer's node should be visible in the tree.
+    
+        upgrades: {
+            
+                 11: {
+                    title: "life remade",
+                    description: "Multiply your Golden Coin gain by 10.",
+                    cost: new Decimal(1),
+               },
+            },
+} )
