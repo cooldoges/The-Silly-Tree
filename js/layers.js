@@ -54,8 +54,7 @@ addLayer("e", {
 })
 addLayer("p", {
     startData() { return {                  // startData is a function that returns default data for a layer. 
-        unlocked: false,
-        requires: new Decimal(200),       // You can add more variables here to add them to your layer.
+        unlocked: false,      // You can add more variables here to add them to your layer.
         points: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
     }},
 
@@ -66,8 +65,53 @@ addLayer("p", {
     baseResource: "points",                 // The name of the resource your prestige gain is based on.
     baseAmount() { return player.points },  // A function to return the current amount of baseResource.
 
-    requires: new Decimal(10),              // The amount of the base needed to  gain 1 of the prestige currency.
+    requires: new Decimal(2000),              // The amount of the base needed to  gain 1 of the prestige currency.
                                             // Also the amount required to unlock the layer.
+
+    type: "normal",                         // Determines the formula used for calculating prestige currency.
+    exponent: 0.5,                          // "normal" prestige gain is (currency^exponent).
+
+    gainMult() {                            // Returns your multiplier to your gain of the prestige resource.
+        return new Decimal(1)               // Factor in any bonuses multiplying gain here.
+    },
+    gainExp() {                             // Returns the exponent to your gain of the prestige resource.
+        return new Decimal(1)
+    },
+
+    layerShown() { return true },          // Returns a bool for if this layer's node should be visible in the tree.
+
+    upgrades: {
+        11: {
+            title: "New generator Coat",
+            description: "Double your Golden Coin gain again.",
+            cost: new Decimal(1),
+         12: {
+            title: "More Store Trips",
+            description: "Double your Egg gain.",
+            cost: new Decimal(5),
+         },
+            
+        },
+        hotkeys: [
+            {key: "p", description: "P: Reset for Paint Buckets", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        ],
+
+}},
+addLayer("w", {
+    startData() { return {                  // startData is a function that returns default data for a layer. 
+        unlocked: false,      // You can add more variables here to add them to your layer.
+        points: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
+    }},
+
+    color: "#4BDC13",                       // The color for this layer, which affects many elements.
+    resource: "Washing Machines",            // The name of this layer's main prestige resource.
+    row: 1,                                 // The row this layer is on (0 is the first row).
+
+    baseResource: "points",                 // The name of the resource your prestige gain is based on.
+    baseAmount() { return player.points },  // A function to return the current amount of baseResource.
+
+    requires: new Decimal(2000),              // The amount of the base needed to  gain 1 of the prestige currency.
+                                              // Also the amount required to unlock the layer.
 
     type: "normal",                         // Determines the formula used for calculating prestige currency.
     exponent: 0.5,                          // "normal" prestige gain is (currency^exponent).
@@ -84,4 +128,11 @@ addLayer("p", {
     upgrades: {
         // Look in the upgrades docs to see what goes here!
     },
-})
+    hotkeys: [
+        {
+            key: "p", // What the hotkey button is. Use uppercase if it's combined with shift, or "ctrl+x" for holding down ctrl.
+            description: "P: reset Eggs and Golden Coins for Paint Buckets", // The description of the hotkey that is displayed in the game's How To Play tab
+            onPress() { if (player.p.unlocked) doReset("p") },
+        }
+    ]
+}))
