@@ -13,15 +13,15 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1",
-	name: "starting the thingy",
+	num: "0.2",
+	name: "smol nerf",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
-
+    <h3>v0.0</h3><br>
+		- Added new egg upgrade.<br>
+		- Decreased Insanity Cost by a whopping one digit.`
+	
 let winText = `you did the thing wait for a update i guess`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
@@ -50,7 +50,8 @@ function getPointGen() {
 		if (hasUpgrade('p', 12)) gain = gain.times(3)
 		if (hasUpgrade('w', 12)) gain = gain.times(3)
 		if (hasUpgrade('e', 21)) gain = gain.times(5)
-		if (hasUpgrade('e', 12)) gain = gain.times(upgradeEffect('e', 12))			
+		if (hasUpgrade('e', 12)) gain = gain.times(upgradeEffect('e', 12))
+		if (hasUpgrade('i', 11)) gain = gain.times(10)			
 		return gain
 }
 
