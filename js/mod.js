@@ -16,9 +16,8 @@ let VERSION = {
 	num: "0.2",
 	name: "smol nerf",
 }
-
 let changelog = `<h1>Changelog:</h1><br>
-    <h3>v0.0</h3><br>
+    <h3>v0.2</h3><br>
 		- Added new egg upgrade.<br>
 		- Decreased Insanity Cost by a whopping one digit.`
 	
