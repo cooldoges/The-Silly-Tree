@@ -49,6 +49,11 @@ addLayer("e", {
                 return player.points.add(1).pow(0.15)
             },
         },
+        21: {
+            title: "GIGABOOST",
+            description: "mutliply your Golden Coin gain by 5.",
+            cost: new Decimal(500),
+        },
     },
 
 })
